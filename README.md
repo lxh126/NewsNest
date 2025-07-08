@@ -61,14 +61,6 @@ app/
     adb install app-debug.apk
     ```
 
-
-## Resume Highlights
-
-- Developed a full-featured Android news app with tabbed browsing, advanced search, and personalized content filtering.
-- Implemented local data caching, favorites, and history management using SQLite.
-- Integrated AI-powered news summarization for enhanced user experience.
-- Utilized modern Android UI components and best practices for robust, maintainable code.
-
 ---
 
 **Author:** 罗雪蘅  
