@@ -1,0 +1,131 @@
+package com.app.luoxueheng.db;
+
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import androidx.annotation.Nullable;
+
+import com.app.luoxueheng.entity.CollectionInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CollectionDbHelper extends SQLiteOpenHelper {
+    private static  CollectionDbHelper sHelper;
+    private static final String DB_NAME = "collection.db";   //数据库名
+    private static final int VERSION = 1;    //版本号
+
+    //必须实现其中一个构方法
+    public  CollectionDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+    //创建单例，供使用调用该类里面的的增删改查的方法
+    public synchronized static CollectionDbHelper getInstance(Context context) {
+        if (null == sHelper) {
+            sHelper = new  CollectionDbHelper(context, DB_NAME, null, VERSION);
+        }
+        return sHelper;
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        //创建collection_table表
+        db.execSQL("create table collection_table(collection_id integer primary key autoincrement, " +
+                "newsID text," +       //新闻ID
+                "username text," +       //用户名
+                "new_json text" +      //密码
+
+                ")");
+
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+    /**
+     * 添加历史记录
+     */
+    public int addCollection(String username, String newsID, String new_json) {
+        //判断是否浏览过历史记录
+        if(!isCollection(newsID)){
+            //获取SQLiteDatabase实例
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            //填充占位符
+            values.put("newsID", newsID);
+            values.put("username", username);
+            values.put("new_json", new_json);
+            String nullColumnHack = "values(null,?,?,?)";
+            //执行
+            int insert = (int) db.insert("collection_table", nullColumnHack, values);
+            db.close();
+            return insert;
+        }
+        return 0;
+    }
+    /**
+     * 根据newsID删除收藏记录
+     */
+    public int delete(String newsID) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getWritableDatabase();
+        // 执行SQL
+        int delete = db.delete("collection_table", " newsID=?", new String[]{newsID});
+        // 关闭数据库连接
+        db.close();
+        return delete;
+    }
+    /**
+     * 判断是否浏览过历史记录
+     */
+    @SuppressLint("Range")
+    public boolean isCollection(String newsID) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "select collection_id,newsID,username,new_json  from collection_table where newsID=?";
+        String[] selectionArgs = {newsID};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        //cursor.close();
+        //db.close();
+        return cursor.moveToNext();
+    }
+
+    /**
+     * 查询历史记录
+     */
+    @SuppressLint("Range")
+    public List<CollectionInfo> queryCollectionListData(String username) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getReadableDatabase();
+        List<CollectionInfo > list = new ArrayList<>();
+        String sql;
+        Cursor cursor;
+        if(username==null){
+            sql="select collection_id,newsID,username,new_json  from collection_table";
+            cursor = db.rawQuery(sql,null);
+        }else{
+            sql="select collection_id,newsID,username,new_json  from collection_table where username=?";
+            cursor = db.rawQuery(sql, new String[]{username});
+        }
+        while (cursor.moveToNext()) {
+            int collection_id = cursor.getInt(cursor.getColumnIndex("collection_id"));
+            String newsID = cursor.getString(cursor.getColumnIndex("newsID"));
+            String userName = cursor.getString(cursor.getColumnIndex("username"));
+            String new_json = cursor.getString(cursor.getColumnIndex("new_json"));
+            list.add(new CollectionInfo(collection_id, newsID,userName,new_json));
+        }
+        cursor.close();
+        //db.close();
+        return list;
+    }
+
+
+
+
+}

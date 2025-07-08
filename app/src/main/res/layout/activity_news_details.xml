@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewsDetailsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_200">
+            <ImageButton
+                android:id="@+id/myButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="点击添加收藏"
+                android:background="@drawable/baseline_star_white"/>
+        </androidx.appcompat.widget.Toolbar>
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_200"
+        app:title="xxx"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"/>
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textIsSelectable="true"-->
+<!--        android:linksClickable="true" />-->
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+<!--    <VideoView-->
+<!--        android:id="@+id/videoView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+<!--    <WebView-->
+<!--        android:id="@+id/webView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+<!--            <VideoView-->
+<!--                android:id="@+id/videoView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_centerInParent="true"/>-->
+            <TextView
+                android:id="@+id/textViewtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"/>
+            <TextView
+                android:id="@+id/textViewsource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/textViewtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/textViewcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="这里是一段文字"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp"/>
+            <TextView
+                android:id="@+id/textViewabstract"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="大模型摘要正在生成，请稍候。。。"
+                android:textSize="18sp"
+                android:textColor="@color/purple_200"/>
+
+            <!-- ImageView将动态添加 -->
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <androidx.appcompat.widget.Toolbar
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:navigationIcon="@drawable/baseline_menu_24"
+       android:background="@color/purple_200">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="40dp">
+           <Button
+               android:id="@+id/buttontosearch"
+               style="@style/CustomButtonStyle"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:textColor="@color/white"
+               android:background="@drawable/baseline_rectangle_notselected"
+               android:text="点击跳转搜索"/>
+
+       </RelativeLayout>
+   </androidx.appcompat.widget.Toolbar>
+
+
+   <androidx.appcompat.widget.LinearLayoutCompat
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <com.google.android.material.tabs.TabLayout
+           android:id="@+id/tab_layout"
+           app:tabMode="scrollable"
+           app:tabIndicatorFullWidth="false"
+           app:tabSelectedTextColor="@color/purple_200"
+           app:tabTextColor="#222222"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+       <androidx.viewpager2.widget.ViewPager2
+           android:id="@+id/viewPager"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+       </androidx.viewpager2.widget.ViewPager2>
+
+   </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
